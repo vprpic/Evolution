@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+	public int timeScale;
 	public static GameManager instance;
 	public WorldManager worldManager;
 	public List<Creature> population;
@@ -15,15 +16,18 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		instance = this;
-		maxFoodCount = 5;
-		foodTimer = UnityEngine.Random.Range(5f, 10f);
+		foodTimer = UnityEngine.Random.Range(3f, 5f);
 		timer = foodTimer;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Time.timeScale = timeScale;
 		timer += Time.deltaTime;
-		if (worldManager.allFood.Count <= maxFoodCount)
+		if (worldManager.allFood.Count < maxFoodCount/5 )
+		{
+			AddFoodToRandomPoint();
+		}else if (worldManager.allFood.Count <= maxFoodCount)
 		{
 			AddFood();
 		}
@@ -41,6 +45,6 @@ public class GameManager : MonoBehaviour {
 
 	private void AddFoodToRandomPoint()
 	{
-		worldManager.PlaceFood(worldManager.getRandomPositionInWorld());
+		worldManager.PlaceFood(worldManager.getRandomPositionInWorld(40f));
 	}
 }

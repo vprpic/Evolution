@@ -10,6 +10,7 @@ public class WorldManager : MonoBehaviour {
 	public Transform bottomLeftCorner;
 	public Transform center;
 	public List<Food> allFood;
+	public List<Creature> allCreatures;
 
 	// Use this for initialization
 	void Start () {
@@ -21,9 +22,9 @@ public class WorldManager : MonoBehaviour {
 		
 	}
 
-	public Vector3 getRandomPositionInWorld()
+	public Vector3 getRandomPositionInWorld(float range)
 	{
-		Vector3 position = RandomNavSphere(center.position, 40f, -1);
+		Vector3 position = RandomNavSphere(center.position, range, -1);
 		return position;
 	}
 

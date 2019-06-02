@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewRadius : Gene {
+public class LifeSpan : Gene
+{
 	public float value;
 
-	public ViewRadius(float value_)
+	public LifeSpan(float value_)
 	{
-		name = "ViewRadius";
-		value = value_;
+		name = "LifeSpan";
+		this.value = value_;
 	}
 
-	public override void ChangeSlightly(float percentage)
+	public override void ChangeSlightly(float percent)
 	{
 		float oldvalue = value;
-		float amount = value * percentage;
+		float amount = value * percent;
 		float lowValue = value - amount;
 		if (lowValue < 0)
 			lowValue = 0;
 		value = Random.Range(lowValue, value + amount);
-		Debug.Log("ViewRadius from: " + oldvalue + ", to: " + value);
+		Debug.Log("LifeSpan from: " + oldvalue + ", to: " + value);
 	}
 
 	public override Gene CopyGene()
 	{
-		Gene copied = new ViewRadius(this.value);
+		Gene copied = new LifeSpan(this.value);
 		return copied;
 	}
 }

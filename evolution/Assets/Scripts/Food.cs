@@ -21,13 +21,14 @@ public class Food : MonoBehaviour {
 		if (other.tag.Equals("CreatureBody"))
 		{
 			Creature creature = other.gameObject.transform.parent.gameObject.GetComponent<Creature>();
-			creature.EatFood(this);
+			if(creature!=null)
+				creature.EatFood(this);
 		}
 	}
 
 	private void OnDestroy()
 	{
 		GameManager.instance.worldManager.allFood.Remove(this);
-		Destroy(this);
+		Destroy(this.gameObject);
 	}
 }

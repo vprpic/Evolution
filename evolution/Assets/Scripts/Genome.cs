@@ -23,13 +23,13 @@ public class Genome {
 		Gene found;
 		foreach (Gene gene in genes)
 		{
-			//Debug.Log("findGene: " + gene.name);
 			if (gene.name.Equals(lookFor))
 			{
 				found = gene;
 				return found;
 			}
 		}
+		Debug.LogWarning("Genome '"+lookFor+"' not found.");
 		return null;
 	}
 
@@ -42,7 +42,6 @@ public class Genome {
 	{
 		float mutationAmount = UnityEngine.Random.Range(0,mutationChance);
 		int traitIndex = UnityEngine.Random.Range(0, genes.Count);
-		Debug.Log("trait: " + genes[traitIndex].name);
 
 		genes[traitIndex].ChangeSlightly(mutationAmount);
 
@@ -51,5 +50,15 @@ public class Genome {
 		//MethodInfo myMethodInfo = type.GetMethod("ChangeSlightly");
 		//myMethodInfo.Invoke(genes[traitIndex],mParam);
 		return this;
+	}
+
+	public Genome CopyGenome()
+	{
+		Genome copied = new Genome();
+		foreach(Gene gene in this.genes)
+		{
+			copied.Add(gene.CopyGene());
+		}
+		return copied;
 	}
 }

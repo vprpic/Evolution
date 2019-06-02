@@ -14,12 +14,19 @@ public class MovementSpeed : Gene {
 
 	public override void ChangeSlightly(float percent)
 	{
-		//Debug.Log("MovementSpeed " + percentage);
+		float oldvalue = value;
 		float amount = value * percent;
 
 		float lowValue = value - amount;
 		if (lowValue < 0)
 			lowValue = 0;
 		value = Random.Range(lowValue, value + amount);
+		Debug.Log("MovementSpeed from: " + oldvalue + ", to: " + value);
+	}
+
+	public override Gene CopyGene()
+	{
+		Gene copied = new MovementSpeed(this.value);
+		return copied;
 	}
 }
