@@ -9,12 +9,12 @@ public class Colour : Gene {
 	public Colour(Color32 color_)
 	{
 		name = "Colour";
-		value = color_;
+		this.value = color_;
 	}
 
-	public void ChangeSlightly(float percentage)
+	public override void ChangeSlightly(float percentage)
 	{
-		Debug.Log("Colour "+ percentage);
+		//Debug.Log("Colour "+ percentage);
 		float amount = 255 * percentage;
 		byte r, g, b, a;
 		r = (byte)Random.Range(Mathf.Clamp(value.r - amount, 0, 255), Mathf.Clamp(value.r + amount, 0, 255));

@@ -42,23 +42,14 @@ public class Genome {
 	{
 		float mutationAmount = UnityEngine.Random.Range(0,mutationChance);
 		int traitIndex = UnityEngine.Random.Range(0, genes.Count);
-		Debug.Log("traitIndex: " + traitIndex);
 		Debug.Log("trait: " + genes[traitIndex].name);
-		Debug.Log("traitType: " + genes[traitIndex].GetType());
 
-		Type type = genes[traitIndex].GetType().UnderlyingSystemType;
-		//dynamic
-		//dynamic objekt = Convert.ChangeType(genes[traitIndex], type);
-		//objekt.ChangeSlightly(mutationChance);
+		genes[traitIndex].ChangeSlightly(mutationAmount);
 
-		//reflection
-		object[] mParam = new object[] { mutationAmount };
-		MethodInfo myMethodInfo = type.GetMethod("ChangeSlightly");
-		myMethodInfo.Invoke(genes[traitIndex],mParam);
-
-		//TODO: change gene
-		//((Colour)this.findGene("Colour")).ChangeSlightly(mutationAmount);
-		//Debug.Log("MutationAmount" + mutationAmount);
+		//Type type = genes[traitIndex].GetType().UnderlyingSystemType;
+		//object[] mParam = new object[] { mutationAmount };
+		//MethodInfo myMethodInfo = type.GetMethod("ChangeSlightly");
+		//myMethodInfo.Invoke(genes[traitIndex],mParam);
 		return this;
 	}
 }

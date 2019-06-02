@@ -87,12 +87,10 @@ public class Creature : MonoBehaviour {
 		}
 		if (wander)
 		{
-			Debug.Log("Wander");
 			Wander();
 		}
 		else
 		{
-			Debug.Log("Move");
 			Move(destination);
 		}
 	}
@@ -124,7 +122,13 @@ public class Creature : MonoBehaviour {
 
 	public void MultiplyWithMutation(float mutationChance)
 	{
-		Vector3 position = RandomNavSphere(creatureGO.transform.position, 1.5f, -1);
+		Vector3 position = WorldManager.RandomNavSphere(creatureGO.transform.position, 1.5f, -1);
+		while (position.x == Mathf.Infinity || position.y == Mathf.Infinity || position.z == Mathf.Infinity||
+			position.x == Mathf.NegativeInfinity || position.y == Mathf.NegativeInfinity || position.z == Mathf.NegativeInfinity)
+		{
+			Debug.Log("while position == infinity");
+			position = WorldManager.RandomNavSphere(creatureGO.transform.position, 1.5f, -1);
+		}
 		GameObject baby = Instantiate(creaturePrefab, position, Quaternion.identity);
 		Creature babyCreature = baby.GetComponent<Creature>();
 		babyCreature.creatureGO = baby;
@@ -152,7 +156,7 @@ public class Creature : MonoBehaviour {
 
 		if (timer >= wanderTimer)
 		{
-			agent.SetDestination(RandomNavSphere(transform.position, distance, -1));
+			agent.SetDestination(WorldManager.RandomNavSphere(transform.position, distance, -1));
 			timer = 0;
 			wanderTimer = Random.Range(1f, 5f);
 		}
@@ -161,17 +165,5 @@ public class Creature : MonoBehaviour {
 	
 	#endregion
 
-	/*
-	 * Find a random destination on the navmesh in range of the origin
-	 * layermask = -1 for all
-	*/
-	public static Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
-	{
-		Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
-		randomDirection += origin;
-		NavMeshHit navHit;
-		NavMesh.SamplePosition(randomDirection, out navHit, distance, layermask);
-
-		return navHit.position;
-	}
+	
 }

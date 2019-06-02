@@ -11,9 +11,9 @@ public class ViewRadius : Gene {
 		value = value_;
 	}
 
-	public void ChangeSlightly(float percentage)
+	public override void ChangeSlightly(float percentage)
 	{
-		Debug.Log("ViewRadius " + percentage);
+		//Debug.Log("ViewRadius " + percentage);
 		float amount = value * percentage;
 		float lowValue = value - amount;
 		if (lowValue < 0)

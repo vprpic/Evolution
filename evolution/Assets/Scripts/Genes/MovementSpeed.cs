@@ -12,10 +12,10 @@ public class MovementSpeed : Gene {
 		value = value_;
 	}
 
-	public void ChangeSlightly(float percentage)
+	public override void ChangeSlightly(float percent)
 	{
-		Debug.Log("MovementSpeed " + percentage);
-		float amount = value * percentage;
+		//Debug.Log("MovementSpeed " + percentage);
+		float amount = value * percent;
 
 		float lowValue = value - amount;
 		if (lowValue < 0)

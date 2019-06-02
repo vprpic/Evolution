@@ -6,7 +6,6 @@ public class Food : MonoBehaviour {
 
 	public float value;
 
-
 	// Use this for initialization
 	void Start () {
 		
@@ -24,5 +23,11 @@ public class Food : MonoBehaviour {
 			Creature creature = other.gameObject.transform.parent.gameObject.GetComponent<Creature>();
 			creature.EatFood(this);
 		}
+	}
+
+	private void OnDestroy()
+	{
+		GameManager.instance.worldManager.allFood.Remove(this);
+		Destroy(this);
 	}
 }
